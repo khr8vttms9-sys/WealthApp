@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   });
 
-  // Speech Recognition setup
+  // Speech Recognition
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (SR) {
     recognition = new SR();
@@ -281,7 +281,7 @@ function renderDashboard() {
       </div>
     </div>
 
-    <!-- Pie with clear legend -->
+    <!-- Pie with clear legend (click disabled) -->
     <div class="wa-card p-4 mb-4">
       <h3 class="font-semibold text-sm mb-3">Allocation (Pie)</h3>
       <div style="height:200px"><canvas id="pieChart"></canvas></div>
@@ -314,7 +314,7 @@ function renderDashboard() {
   `;
 
   setTimeout(() => {
-    // Pie
+    // Pie - click disabled
     charts.pie = new Chart(document.getElementById('pieChart'), {
       type: 'doughnut',
       data: {
@@ -328,7 +328,10 @@ function renderDashboard() {
       options: {
         responsive: true, maintainAspectRatio: false, cutout: '58%',
         plugins: {
-          legend: { display: false },
+          legend: { 
+            display: false,
+            onClick: null
+          },
           tooltip: {
             callbacks: {
               label: ctx => {
@@ -341,7 +344,7 @@ function renderDashboard() {
       }
     });
 
-    // Bar
+    // Bar - click disabled
     charts.bar = new Chart(document.getElementById('barChart'), {
       type: 'bar',
       data: {
@@ -354,7 +357,9 @@ function renderDashboard() {
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
+        plugins: { 
+          legend: { display: false, onClick: null } 
+        },
         scales: {
           x: { grid: { display: false }, ticks: { font: { size: 10 } } },
           y: { grid: { color: document.documentElement.classList.contains('dark') ? '#054C44' : '#f1f5f9' } }
@@ -362,7 +367,7 @@ function renderDashboard() {
       }
     });
 
-    // Income vs Expense
+    // Income vs Expense - click disabled
     charts.ie = new Chart(document.getElementById('ieChart'), {
       type: 'bar',
       data: {
@@ -375,7 +380,9 @@ function renderDashboard() {
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
+        plugins: { 
+          legend: { display: false, onClick: null } 
+        },
         scales: {
           x: { grid: { display: false } },
           y: { grid: { color: document.documentElement.classList.contains('dark') ? '#054C44' : '#f1f5f9' } }
@@ -538,13 +545,11 @@ function processCommand(text) {
   const lower = text.toLowerCase();
   let reply = '';
 
-  // Detect amount
   const amountMatch = text.match(/(?:rs\.?|inr|₹|\$)?\s*([\d,]+(?:\.\d+)?)\s*(?:lakh|lac|l|cr|crore)?/i);
   let amount = amountMatch ? parseFloat(amountMatch[1].replace(/,/g,'')) : null;
   if (amount && /lakh|lac|\bl\b/i.test(text)) amount *= 100000;
   if (amount && /crore|\bcr\b/i.test(text)) amount *= 10000000;
 
-  // Credit / Debit detection from SMS style
   const isCredit = /(?:credited|credit|received|cr\b|deposit)/i.test(text);
   const isDebit  = /(?:debited|debit|spent|paid|dr\b|withdrawn)/i.test(text);
 
@@ -560,7 +565,6 @@ function processCommand(text) {
     BASE.expenses.push({ name: 'SMS Debit', amount, cat });
     reply = `Detected debit of ${convFull(amount)} (${cat}). Added to Expenses.`;
   }
-  // Voice style commands
   else if (/add.*(expense|spent)/i.test(lower) && amount) {
     let cat = 'Other';
     if (/grocery/i.test(lower)) cat = 'Grocery';
@@ -621,7 +625,7 @@ function renderMore() {
         <span class="font-medium text-sm">Settings</span>
       </div>
     </div>
-    <p class="text-xs text-slate-400 text-center mt-8">WealthApp v0.5 • Chat + Voice</p>
+    <p class="text-xs text-slate-400 text-center mt-8">WealthApp v0.5 • Charts locked to full data</p>
   `;
   lucide.createIcons();
 }
