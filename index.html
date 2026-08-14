@@ -4,13 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#075E54" />
   <title>WealthApp</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -18,11 +14,7 @@
       theme: {
         extend: {
           colors: {
-            wa: {
-              50: '#E7F8F2', 100: '#D1F0E5', 400: '#25D366',
-              500: '#128C7E', 600: '#075E54', 700: '#054C44',
-              800: '#033D37', 900: '#022E29'
-            }
+            wa: { 50:'#E7F8F2', 400:'#25D366', 500:'#128C7E', 600:'#075E54', 700:'#054C44', 800:'#033D37', 900:'#022E29' }
           },
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
         }
@@ -31,606 +23,615 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
-    .wa-card {
-      background: white; border-radius: 1.25rem;
-      box-shadow: 0 2px 12px rgba(7, 94, 84, 0.06);
-      border: 1px solid #E7F8F2;
-    }
-    .dark .wa-card { background: #033D37; border-color: #054C44; }
-    .nav-btn { color: #64748b; }
-    .nav-btn.active { color: #128C7E; background: rgba(37, 211, 102, 0.12); }
-    .dark .nav-btn.active { color: #25D366; background: rgba(37, 211, 102, 0.15); }
-    .icon-box {
-      width: 42px; height: 42px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .progress-bar { height: 8px; border-radius: 99px; background: #E7F8F2; overflow: hidden; }
-    .dark .progress-bar { background: #054C44; }
-    .progress-fill { height: 100%; border-radius: 99px; }
-    .view-enter { animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    body{font-family:'Inter',system-ui,sans-serif}
+    .wa-card{background:#fff;border-radius:1.25rem;box-shadow:0 2px 12px rgba(7,94,84,.06);border:1px solid #E7F8F2}
+    .dark .wa-card{background:#033D37;border-color:#054C44}
+    .nav-btn{color:#64748b}
+    .nav-btn.active{color:#128C7E;background:rgba(37,211,102,.12)}
+    .dark .nav-btn.active{color:#25D366;background:rgba(37,211,102,.15)}
+    .icon-box{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .progress-bar{height:8px;border-radius:99px;background:#E7F8F2;overflow:hidden}
+    .dark .progress-bar{background:#054C44}
+    .progress-fill{height:100%;border-radius:99px}
+    .chat-bubble{max-width:85%;padding:.75rem 1rem;border-radius:1.1rem;font-size:.875rem;line-height:1.4}
+    .chat-user{background:#128C7E;color:#fff;margin-left:auto;border-bottom-right-radius:.3rem}
+    .chat-bot{background:#E7F8F2;color:#033D37;border-bottom-left-radius:.3rem}
+    .dark .chat-bot{background:#054C44;color:#E7F8F2}
   </style>
 </head>
 <body class="h-full bg-slate-50 dark:bg-wa-900 text-slate-900 dark:text-slate-100 antialiased">
-  
-  <div id="app" class="h-full flex flex-col max-w-[900px] mx-auto relative">
-    
-    <!-- Header -->
-    <header class="sticky top-0 z-40 bg-[#075E54] text-white shadow-lg">
-      <div class="px-4 py-3.5 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-[#25D366] flex items-center justify-center font-bold text-lg">W</div>
-          <div>
-            <h1 class="text-lg font-bold">WealthApp</h1>
-            <p class="text-[10px] text-green-200 -mt-0.5">Your Money, Clearly</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2">
-          <select id="currencySelect" class="bg-white/20 text-white text-xs rounded-lg px-2 py-1.5 border-0 outline-none">
-            <option value="INR">INR ₹</option>
-            <option value="USD">USD $</option>
-            <option value="EUR">EUR €</option>
-            <option value="AED">AED د.إ</option>
-            <option value="GBP">GBP £</option>
-            <option value="SGD">SGD $</option>
-          </select>
-          <button id="themeToggle" class="p-2 rounded-full hover:bg-white/10">
-            <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
-            <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
-          </button>
+<div id="app" class="h-full flex flex-col max-w-[900px] mx-auto relative">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#075E54] text-white shadow-lg">
+    <div class="px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-full bg-[#25D366] flex items-center justify-center font-bold text-lg">W</div>
+        <div>
+          <h1 class="text-lg font-bold leading-tight">WealthApp</h1>
+          <p class="text-[10px] text-green-200">Your Money, Clearly</p>
         </div>
       </div>
-    </header>
-
-    <main id="mainContent" class="flex-1 overflow-y-auto pb-28 px-4 pt-4"></main>
-
-    <!-- Bottom Nav -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-wa-800 border-t border-slate-200 dark:border-wa-700">
-      <div class="max-w-[900px] mx-auto flex items-center justify-around py-2">
-        <button data-view="dashboard" class="nav-btn active flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-          <span class="text-[10px] font-medium">Home</span>
-        </button>
-        <button data-view="wealth" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-          <i data-lucide="wallet" class="w-5 h-5"></i>
-          <span class="text-[10px] font-medium">Wealth</span>
-        </button>
-        <button data-view="add" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-          <div class="w-10 h-10 -mt-5 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg">
-            <i data-lucide="plus" class="w-6 h-6"></i>
-          </div>
-          <span class="text-[10px] font-medium mt-0.5">Add</span>
-        </button>
-        <button data-view="cashflow" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-          <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
-          <span class="text-[10px] font-medium">Cashflow</span>
-        </button>
-        <button data-view="more" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-          <span class="text-[10px] font-medium">More</span>
+      <div class="flex items-center gap-2">
+        <select id="currencySelect" class="bg-white/20 text-white text-xs rounded-lg px-2 py-1.5 border-0 outline-none">
+          <option value="INR">INR ₹</option>
+          <option value="USD">USD $</option>
+          <option value="EUR">EUR €</option>
+          <option value="AED">AED</option>
+          <option value="GBP">GBP £</option>
+        </select>
+        <button id="themeToggle" class="p-2 rounded-full hover:bg-white/10">
+          <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
         </button>
       </div>
-    </nav>
-  </div>
-
-  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-[100] hidden">
-    <div class="bg-[#075E54] text-white px-5 py-3 rounded-2xl shadow-xl text-sm font-medium flex items-center gap-2">
-      <i data-lucide="check-circle" class="w-4 h-4 text-[#25D366]"></i>
-      <span id="toastMsg">Done</span>
     </div>
+  </header>
+
+  <main id="mainContent" class="flex-1 overflow-y-auto pb-28 px-4 pt-4"></main>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-wa-800 border-t border-slate-200 dark:border-wa-700">
+    <div class="max-w-[900px] mx-auto flex items-center justify-around py-2">
+      <button data-view="dashboard" class="nav-btn active flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[60px]">
+        <i data-lucide="layout-dashboard" class="w-5 h-5"></i><span class="text-[10px] font-medium">Home</span>
+      </button>
+      <button data-view="wealth" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[60px]">
+        <i data-lucide="wallet" class="w-5 h-5"></i><span class="text-[10px] font-medium">Wealth</span>
+      </button>
+      <button data-view="add" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[60px]">
+        <div class="w-10 h-10 -mt-5 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg">
+          <i data-lucide="plus" class="w-6 h-6"></i>
+        </div>
+        <span class="text-[10px] font-medium mt-0.5">Add</span>
+      </button>
+      <button data-view="chat" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[60px]">
+        <i data-lucide="message-circle" class="w-5 h-5"></i><span class="text-[10px] font-medium">Chat</span>
+      </button>
+      <button data-view="more" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[60px]">
+        <i data-lucide="menu" class="w-5 h-5"></i><span class="text-[10px] font-medium">More</span>
+      </button>
+    </div>
+  </nav>
+</div>
+
+<div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-[100] hidden">
+  <div class="bg-[#075E54] text-white px-5 py-3 rounded-2xl shadow-xl text-sm font-medium flex items-center gap-2">
+    <i data-lucide="check-circle" class="w-4 h-4 text-[#25D366]"></i>
+    <span id="toastMsg">Done</span>
   </div>
+</div>
 
-  <script>
-    // ===== BASE DATA (Total Assets ≈ 27 Lakhs) =====
-    const BASE = {
-      assetsTotal: 2700000,
-      liabilitiesTotal: 420000,
-      change: 1.8,
-      categories: [
-        { id: 'property', name: 'Real Estate', value: 1200000, icon: 'building-2', color: '#3B82F6', bg: 'bg-blue-500/10 text-blue-600' },
-        { id: 'stocks', name: 'Stocks & Equity', value: 480000, icon: 'trending-up', color: '#8B5CF6', bg: 'bg-violet-500/10 text-violet-600' },
-        { id: 'fd', name: 'Fixed Deposits', value: 450000, icon: 'landmark', color: '#10B981', bg: 'bg-emerald-500/10 text-emerald-600' },
-        { id: 'gold', name: 'Gold & Jewellery', value: 320000, icon: 'gem', color: '#F59E0B', bg: 'bg-amber-500/10 text-amber-600' },
-        { id: 'vehicles', name: 'Vehicles', value: 180000, icon: 'car', color: '#F97316', bg: 'bg-orange-500/10 text-orange-600' },
-        { id: 'cash', name: 'Cash & Liquid', value: 70000, icon: 'piggy-bank', color: '#64748B', bg: 'bg-slate-500/10 text-slate-600' }
-      ],
-      assets: [
-        { id: 1, cat: 'property', name: '2BHK Apartment', value: 1200000, bought: 950000, location: 'Pune' },
-        { id: 2, cat: 'stocks', name: 'Equity Portfolio', value: 480000, invested: 390000 },
-        { id: 3, cat: 'fd', name: 'HDFC Bank FD', value: 300000, rate: 7.1 },
-        { id: 4, cat: 'fd', name: 'SBI FD', value: 150000, rate: 6.8 },
-        { id: 5, cat: 'gold', name: '22K Jewellery', value: 220000, weight: '85g' },
-        { id: 6, cat: 'gold', name: 'Gold Coins + SGB', value: 100000 },
-        { id: 7, cat: 'vehicles', name: 'Honda City', value: 150000, bought: 280000 },
-        { id: 8, cat: 'vehicles', name: 'Activa 6G', value: 30000, bought: 85000 },
-        { id: 9, cat: 'cash', name: 'Savings + Liquid', value: 70000 }
-      ],
-      liabilities: [
-        { name: 'Home Loan', outstanding: 380000, emi: 18500 },
-        { name: 'Personal Loan', outstanding: 40000, emi: 4500 }
-      ],
-      income: [
-        { name: 'Salary', amount: 95000 },
-        { name: 'Rental / Side', amount: 12000 },
-        { name: 'Interest & Dividend', amount: 4500 }
-      ],
-      expenses: [
-        { name: 'Home Loan EMI', amount: 18500, cat: 'Housing' },
-        { name: 'Personal Loan EMI', amount: 4500, cat: 'Loan' },
-        { name: 'School / Education', amount: 12000, cat: 'Education' },
-        { name: 'Utilities', amount: 4800, cat: 'Utilities' },
-        { name: 'Grocery', amount: 14500, cat: 'Grocery' },
-        { name: 'Dining Out', amount: 6200, cat: 'Dining' },
-        { name: 'Shopping', amount: 8500, cat: 'Shopping' },
-        { name: 'Fuel & Transport', amount: 5200, cat: 'Transport' },
-        { name: 'Healthcare', amount: 2100, cat: 'Health' },
-        { name: 'Subscriptions', amount: 1499, cat: 'Other' }
-      ]
+<script>
+/* ===================== DATA (27 Lakh base) ===================== */
+const BASE = {
+  assetsTotal: 2700000,
+  liabilitiesTotal: 420000,
+  change: 1.8,
+  categories: [
+    { id:'property', name:'Real Estate', value:1200000, icon:'building-2', color:'#3B82F6', bg:'bg-blue-500/10 text-blue-600' },
+    { id:'stocks', name:'Stocks & Equity', value:480000, icon:'trending-up', color:'#8B5CF6', bg:'bg-violet-500/10 text-violet-600' },
+    { id:'fd', name:'Fixed Deposits', value:450000, icon:'landmark', color:'#10B981', bg:'bg-emerald-500/10 text-emerald-600' },
+    { id:'gold', name:'Gold & Jewellery', value:320000, icon:'gem', color:'#F59E0B', bg:'bg-amber-500/10 text-amber-600' },
+    { id:'vehicles', name:'Vehicles', value:180000, icon:'car', color:'#F97316', bg:'bg-orange-500/10 text-orange-600' },
+    { id:'cash', name:'Cash & Liquid', value:70000, icon:'piggy-bank', color:'#64748B', bg:'bg-slate-500/10 text-slate-600' }
+  ],
+  assets: [
+    { id:1, cat:'property', name:'2BHK Apartment', value:1200000, location:'Pune' },
+    { id:2, cat:'stocks', name:'Equity Portfolio', value:480000 },
+    { id:3, cat:'fd', name:'HDFC Bank FD', value:300000, rate:7.1 },
+    { id:4, cat:'fd', name:'SBI FD', value:150000, rate:6.8 },
+    { id:5, cat:'gold', name:'22K Jewellery', value:220000, weight:'85g' },
+    { id:6, cat:'gold', name:'Gold Coins + SGB', value:100000 },
+    { id:7, cat:'vehicles', name:'Honda City', value:150000 },
+    { id:8, cat:'vehicles', name:'Activa 6G', value:30000 },
+    { id:9, cat:'cash', name:'Savings + Liquid', value:70000 }
+  ],
+  liabilities: [
+    { name:'Home Loan', outstanding:380000, emi:18500 },
+    { name:'Personal Loan', outstanding:40000, emi:4500 }
+  ],
+  income: [
+    { name:'Salary', amount:95000 },
+    { name:'Side / Rental', amount:12000 },
+    { name:'Interest & Dividend', amount:4500 }
+  ],
+  expenses: [
+    { name:'Home Loan EMI', amount:18500, cat:'Housing' },
+    { name:'Personal Loan EMI', amount:4500, cat:'Loan' },
+    { name:'School Fees', amount:12000, cat:'Education' },
+    { name:'Utilities', amount:4800, cat:'Utilities' },
+    { name:'Grocery', amount:14500, cat:'Grocery' },
+    { name:'Dining Out', amount:6200, cat:'Dining' },
+    { name:'Shopping', amount:8500, cat:'Shopping' },
+    { name:'Fuel', amount:5200, cat:'Transport' },
+    { name:'Healthcare', amount:2100, cat:'Health' },
+    { name:'Subscriptions', amount:1499, cat:'Other' }
+  ]
+};
+
+const RATES = {
+  INR:{symbol:'₹', rate:1},
+  USD:{symbol:'$', rate:0.012},
+  EUR:{symbol:'€', rate:0.011},
+  AED:{symbol:'د.إ', rate:0.044},
+  GBP:{symbol:'£', rate:0.0095}
+};
+
+let currency = 'INR';
+let currentView = 'dashboard';
+let charts = {};
+let chatHistory = [];
+let recognition = null;
+
+function conv(n) {
+  const r = RATES[currency];
+  const v = n * r.rate;
+  if (currency === 'INR') {
+    if (v >= 10000000) return r.symbol + (v/10000000).toFixed(2) + ' Cr';
+    if (v >= 100000) return r.symbol + (v/100000).toFixed(2) + ' L';
+    return r.symbol + Math.round(v).toLocaleString('en-IN');
+  }
+  return r.symbol + Math.round(v).toLocaleString('en-US');
+}
+function convFull(n) {
+  const r = RATES[currency];
+  return r.symbol + Math.round(n * r.rate).toLocaleString(currency==='INR'?'en-IN':'en-US');
+}
+function pct(p,t){ return t ? ((p/t)*100).toFixed(1) : '0'; }
+
+/* ===================== INIT ===================== */
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('wa-theme')==='dark') document.documentElement.classList.add('dark');
+  document.getElementById('themeToggle').onclick = () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('wa-theme', document.documentElement.classList.contains('dark')?'dark':'light');
+    if (currentView==='dashboard') renderDashboard();
+  };
+  document.getElementById('currencySelect').onchange = e => {
+    currency = e.target.value;
+    render(currentView);
+  };
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render(btn.dataset.view);
     };
+  });
 
-    // Currency rates (approximate, relative to INR)
-    const RATES = {
-      INR: { symbol: '₹', rate: 1 },
-      USD: { symbol: '$', rate: 0.012 },
-      EUR: { symbol: '€', rate: 0.011 },
-      AED: { symbol: 'د.إ', rate: 0.044 },
-      GBP: { symbol: '£', rate: 0.0095 },
-      SGD: { symbol: 'S$', rate: 0.016 }
+  // Speech Recognition setup
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SR) {
+    recognition = new SR();
+    recognition.lang = 'en-IN';
+    recognition.interimResults = false;
+    recognition.onresult = (e) => {
+      const text = e.results[0][0].transcript;
+      addChat('user', text);
+      processCommand(text);
     };
+    recognition.onerror = () => showToast('Voice not available or permission denied');
+  }
 
-    let currency = 'INR';
-    let chart1 = null, chart2 = null, chart3 = null;
+  render('dashboard');
+  setTimeout(() => lucide.createIcons(), 60);
+});
 
-    function conv(n) {
-      const r = RATES[currency];
-      const val = n * r.rate;
-      if (currency === 'INR') {
-        if (val >= 10000000) return r.symbol + (val/10000000).toFixed(2) + ' Cr';
-        if (val >= 100000) return r.symbol + (val/100000).toFixed(2) + ' L';
-        return r.symbol + Math.round(val).toLocaleString('en-IN');
+function render(view) {
+  currentView = view;
+  Object.values(charts).forEach(c => c.destroy());
+  charts = {};
+  const main = document.getElementById('mainContent');
+  main.innerHTML = '';
+  if (view === 'dashboard') renderDashboard();
+  else if (view === 'wealth') renderWealth();
+  else if (view === 'add') renderAdd();
+  else if (view === 'chat') renderChat();
+  else if (view === 'more') renderMore();
+  setTimeout(() => lucide.createIcons(), 40);
+}
+
+/* ===================== DASHBOARD ===================== */
+function renderDashboard() {
+  const net = BASE.assetsTotal - BASE.liabilitiesTotal;
+  const income = BASE.income.reduce((s,i)=>s+i.amount,0);
+  const expense = BASE.expenses.reduce((s,e)=>s+e.amount,0);
+  const surplus = income - expense;
+  const total = BASE.assetsTotal;
+
+  document.getElementById('mainContent').innerHTML = `
+    <div class="wa-card p-5 mb-4 bg-gradient-to-br from-[#075E54] to-[#128C7E] text-white border-0">
+      <p class="text-sm text-green-100 mb-1">Total Net Worth</p>
+      <h2 class="text-3xl font-bold">${conv(net)}</h2>
+      <span class="inline-block mt-2 bg-white/20 px-2 py-0.5 rounded-full text-xs">↑ ${BASE.change}% this month</span>
+      <div class="grid grid-cols-2 gap-4 mt-5 pt-4 border-t border-white/20">
+        <div><p class="text-xs text-green-100">Assets</p><p class="font-semibold text-lg">${conv(BASE.assetsTotal)}</p></div>
+        <div><p class="text-xs text-green-100">Liabilities</p><p class="font-semibold text-lg text-red-200">${conv(BASE.liabilitiesTotal)}</p></div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-2.5 mb-4">
+      <div class="wa-card p-3 text-center"><p class="text-[10px] text-slate-500">Income</p><p class="font-bold text-emerald-600 text-sm">${conv(income)}</p></div>
+      <div class="wa-card p-3 text-center"><p class="text-[10px] text-slate-500">Expenses</p><p class="font-bold text-red-500 text-sm">${conv(expense)}</p></div>
+      <div class="wa-card p-3 text-center"><p class="text-[10px] text-slate-500">Surplus</p><p class="font-bold text-[#128C7E] text-sm">${conv(surplus)}</p></div>
+    </div>
+
+    <!-- Category list with % -->
+    <div class="wa-card p-4 mb-4">
+      <h3 class="font-semibold text-sm mb-3">Wealth by Category</h3>
+      <div class="space-y-3">
+        ${BASE.categories.map(c => {
+          const p = pct(c.value, total);
+          return `<div>
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center gap-2">
+                <div class="icon-box ${c.bg}" style="width:28px;height:28px"><i data-lucide="${c.icon}" class="w-3.5 h-3.5"></i></div>
+                <span class="text-sm font-medium">${c.name}</span>
+              </div>
+              <div class="text-right">
+                <p class="text-sm font-semibold">${conv(c.value)}</p>
+                <p class="text-[11px] font-medium text-[#128C7E]">${p}%</p>
+              </div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${p}%;background:${c.color}"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- Pie with clear legend -->
+    <div class="wa-card p-4 mb-4">
+      <h3 class="font-semibold text-sm mb-3">Allocation (Pie)</h3>
+      <div style="height:200px"><canvas id="pieChart"></canvas></div>
+      <div class="grid grid-cols-2 gap-x-3 gap-y-2 mt-3">
+        ${BASE.categories.map(c => {
+          const p = pct(c.value, total);
+          return `<div class="flex items-center gap-2 text-xs">
+            <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${c.color}"></span>
+            <span class="truncate flex-1">${c.name}</span>
+            <span class="font-bold text-[#128C7E]">${p}%</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="wa-card p-4 mb-4">
+      <h3 class="font-semibold text-sm mb-3">Category Comparison</h3>
+      <div style="height:210px"><canvas id="barChart"></canvas></div>
+    </div>
+
+    <div class="wa-card p-4 mb-4">
+      <h3 class="font-semibold text-sm mb-3">Income vs Expenses</h3>
+      <div style="height:170px"><canvas id="ieChart"></canvas></div>
+    </div>
+
+    <div class="wa-card p-4 border-l-4 border-[#25D366]">
+      <p class="text-sm font-medium mb-1">💡 Tip</p>
+      <p class="text-xs text-slate-500">Surplus this month: ${conv(surplus)}. You can invest part of it or keep as emergency buffer.</p>
+    </div>
+  `;
+
+  setTimeout(() => {
+    // Pie
+    charts.pie = new Chart(document.getElementById('pieChart'), {
+      type: 'doughnut',
+      data: {
+        labels: BASE.categories.map(c => c.name),
+        datasets: [{
+          data: BASE.categories.map(c => c.value),
+          backgroundColor: BASE.categories.map(c => c.color),
+          borderWidth: 0, hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '58%',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                const t = ctx.dataset.data.reduce((a,b)=>a+b,0);
+                return ` ${ctx.label}: ${conv(ctx.raw)} (${((ctx.raw/t)*100).toFixed(1)}%)`;
+              }
+            }
+          }
+        }
       }
-      return r.symbol + val.toLocaleString('en-US', { maximumFractionDigits: 0 });
-    }
-    function convFull(n) {
-      const r = RATES[currency];
-      const val = n * r.rate;
-      return r.symbol + Math.round(val).toLocaleString(currency === 'INR' ? 'en-IN' : 'en-US');
-    }
-    function pct(part, total) { return total ? ((part/total)*100).toFixed(1) : '0'; }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (localStorage.getItem('wa-theme') === 'dark') document.documentElement.classList.add('dark');
-      document.getElementById('themeToggle').onclick = () => {
-        document.documentElement.classList.toggle('dark');
-        localStorage.setItem('wa-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-        if (currentView === 'dashboard') renderDashboard();
-      };
-
-      document.getElementById('currencySelect').onchange = (e) => {
-        currency = e.target.value;
-        render(currentView);
-      };
-
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.onclick = () => {
-          document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          render(btn.dataset.view);
-        };
-      });
-
-      render('dashboard');
-      setTimeout(() => lucide.createIcons(), 80);
     });
 
-    let currentView = 'dashboard';
-
-    function render(view) {
-      currentView = view;
-      [chart1, chart2, chart3].forEach(c => { if (c) c.destroy(); });
-      chart1 = chart2 = chart3 = null;
-
-      const main = document.getElementById('mainContent');
-      main.innerHTML = '';
-      main.classList.add('view-enter');
-
-      if (view === 'dashboard') renderDashboard();
-      else if (view === 'wealth') renderWealth();
-      else if (view === 'add') renderAdd();
-      else if (view === 'cashflow') renderCashflow();
-      else if (view === 'more') renderMore();
-      setTimeout(() => lucide.createIcons(), 50);
-    }
-
-    // ========== DASHBOARD ==========
-    function renderDashboard() {
-      const netWorth = BASE.assetsTotal - BASE.liabilitiesTotal;
-      const income = BASE.income.reduce((s,i)=>s+i.amount,0);
-      const expense = BASE.expenses.reduce((s,e)=>s+e.amount,0);
-      const surplus = income - expense;
-      const total = BASE.assetsTotal;
-
-      document.getElementById('mainContent').innerHTML = `
-        <!-- Net Worth -->
-        <div class="wa-card p-5 mb-4 bg-gradient-to-br from-[#075E54] to-[#128C7E] text-white border-0">
-          <p class="text-sm text-green-100 mb-1">Total Net Worth</p>
-          <h2 class="text-3xl font-bold tracking-tight">${conv(netWorth)}</h2>
-          <div class="flex items-center gap-2 mt-2">
-            <span class="bg-white/20 px-2 py-0.5 rounded-full text-xs font-medium">↑ ${BASE.change}% this month</span>
-          </div>
-          <div class="grid grid-cols-2 gap-4 mt-5 pt-4 border-t border-white/20">
-            <div>
-              <p class="text-xs text-green-100">Total Assets</p>
-              <p class="font-semibold text-lg">${conv(BASE.assetsTotal)}</p>
-            </div>
-            <div>
-              <p class="text-xs text-green-100">Liabilities</p>
-              <p class="font-semibold text-lg text-red-200">${conv(BASE.liabilitiesTotal)}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Monthly Snapshot -->
-        <div class="grid grid-cols-3 gap-2.5 mb-4">
-          <div class="wa-card p-3 text-center">
-            <p class="text-[10px] text-slate-500 mb-0.5">Income</p>
-            <p class="font-bold text-emerald-600 text-sm">${conv(income)}</p>
-          </div>
-          <div class="wa-card p-3 text-center">
-            <p class="text-[10px] text-slate-500 mb-0.5">Expenses</p>
-            <p class="font-bold text-red-500 text-sm">${conv(expense)}</p>
-          </div>
-          <div class="wa-card p-3 text-center">
-            <p class="text-[10px] text-slate-500 mb-0.5">Surplus</p>
-            <p class="font-bold text-[#128C7E] text-sm">${conv(surplus)}</p>
-          </div>
-        </div>
-
-        <!-- Category breakdown with % -->
-        <div class="wa-card p-4 mb-4">
-          <h3 class="font-semibold text-sm mb-3">Wealth by Category</h3>
-          <div class="space-y-3">
-            ${BASE.categories.map(c => {
-              const p = pct(c.value, total);
-              return `
-                <div>
-                  <div class="flex items-center justify-between mb-1">
-                    <div class="flex items-center gap-2">
-                      <div class="icon-box ${c.bg}" style="width:30px;height:30px">
-                        <i data-lucide="${c.icon}" class="w-3.5 h-3.5"></i>
-                      </div>
-                      <span class="text-sm font-medium">${c.name}</span>
-                    </div>
-                    <div class="text-right">
-                      <p class="text-sm font-semibold">${conv(c.value)}</p>
-                      <p class="text-[11px] font-medium text-[#128C7E]">${p}%</p>
-                    </div>
-                  </div>
-                  <div class="progress-bar">
-                    <div class="progress-fill" style="width:${p}%;background:${c.color}"></div>
-                  </div>
-                </div>`;
-            }).join('')}
-          </div>
-        </div>
-
-        <!-- Charts Row -->
-        <div class="wa-card p-4 mb-4">
-          <h3 class="font-semibold text-sm mb-3">Allocation (Pie)</h3>
-          <div style="height:200px"><canvas id="pieChart"></canvas></div>
-          <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 mt-3">
-            ${BASE.categories.map(c => {
-              const p = pct(c.value, total);
-              return `
-                <div class="flex items-center gap-2 text-xs">
-                  <span class="w-2.5 h-2.5 rounded-full" style="background:${c.color}"></span>
-                  <span class="truncate">${c.name}</span>
-                  <span class="ml-auto font-semibold">${p}%</span>
-                </div>`;
-            }).join('')}
-          </div>
-        </div>
-
-        <div class="wa-card p-4 mb-4">
-          <h3 class="font-semibold text-sm mb-3">Category Comparison (Bar)</h3>
-          <div style="height:220px"><canvas id="barChart"></canvas></div>
-        </div>
-
-        <div class="wa-card p-4 mb-4">
-          <h3 class="font-semibold text-sm mb-3">Income vs Expenses</h3>
-          <div style="height:180px"><canvas id="incomeExpenseChart"></canvas></div>
-        </div>
-
-        <div class="wa-card p-4 border-l-4 border-[#25D366]">
-          <p class="text-sm font-medium mb-1">💡 Smart Tip</p>
-          <p class="text-xs text-slate-500 leading-relaxed">
-            You have ${conv(surplus)} surplus this month. Consider putting part of it into your SIP or an emergency liquid fund.
-          </p>
-        </div>
-      `;
-
-      setTimeout(() => {
-        // Pie
-        const pieCtx = document.getElementById('pieChart');
-        if (pieCtx) {
-          chart1 = new Chart(pieCtx, {
-            type: 'doughnut',
-            data: {
-              labels: BASE.categories.map(c => c.name),
-              datasets: [{
-                data: BASE.categories.map(c => c.value),
-                backgroundColor: BASE.categories.map(c => c.color),
-                borderWidth: 0,
-                hoverOffset: 8
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              cutout: '58%',
-              plugins: {
-                legend: { display: false },
-                tooltip: {
-                  callbacks: {
-                    label: (ctx) => {
-                      const t = ctx.dataset.data.reduce((a,b)=>a+b,0);
-                      const p = ((ctx.raw/t)*100).toFixed(1);
-                      return ` ${ctx.label}: ${conv(ctx.raw)} (${p}%)`;
-                    }
-                  }
-                }
-              }
-            }
-          });
+    // Bar
+    charts.bar = new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: BASE.categories.map(c => c.name.split(' ')[0]),
+        datasets: [{
+          data: BASE.categories.map(c => c.value),
+          backgroundColor: BASE.categories.map(c => c.color),
+          borderRadius: 6, borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+          y: { grid: { color: document.documentElement.classList.contains('dark') ? '#054C44' : '#f1f5f9' } }
         }
+      }
+    });
 
-        // Bar
-        const barCtx = document.getElementById('barChart');
-        if (barCtx) {
-          chart2 = new Chart(barCtx, {
-            type: 'bar',
-            data: {
-              labels: BASE.categories.map(c => c.name.split(' ')[0]),
-              datasets: [{
-                data: BASE.categories.map(c => c.value),
-                backgroundColor: BASE.categories.map(c => c.color),
-                borderRadius: 6,
-                borderSkipped: false
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: { legend: { display: false } },
-              scales: {
-                x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-                y: {
-                  grid: { color: document.documentElement.classList.contains('dark') ? '#054C44' : '#f1f5f9' },
-                  ticks: { callback: v => conv(v).replace(/[^\d.]/g,'').slice(0,4) }
-                }
-              }
-            }
-          });
+    // Income vs Expense
+    charts.ie = new Chart(document.getElementById('ieChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Income', 'Expenses', 'Surplus'],
+        datasets: [{
+          data: [income, expense, surplus],
+          backgroundColor: ['#10B981', '#EF4444', '#128C7E'],
+          borderRadius: 8, borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: document.documentElement.classList.contains('dark') ? '#054C44' : '#f1f5f9' } }
         }
+      }
+    });
+    lucide.createIcons();
+  }, 40);
+}
 
-        // Income vs Expense
-        const ieCtx = document.getElementById('incomeExpenseChart');
-        if (ieCtx) {
-          chart3 = new Chart(ieCtx, {
-            type: 'bar',
-            data: {
-              labels: ['Income', 'Expenses', 'Surplus'],
-              datasets: [{
-                data: [income, expense, surplus],
-                backgroundColor: ['#10B981', '#EF4444', '#128C7E'],
-                borderRadius: 8,
-                borderSkipped: false
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: { legend: { display: false } },
-              scales: {
-                x: { grid: { display: false } },
-                y: {
-                  grid: { color: document.documentElement.classList.contains('dark') ? '#054C44' : '#f1f5f9' },
-                  ticks: { callback: v => conv(v) }
-                }
-              }
-            }
-          });
-        }
+/* ===================== WEALTH ===================== */
+function renderWealth() {
+  document.getElementById('mainContent').innerHTML = `
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-bold">All Assets</h2>
+      <button onclick="render('add')" class="text-sm font-semibold text-[#128C7E] flex items-center gap-1">
+        <i data-lucide="plus" class="w-4 h-4"></i> Add
+      </button>
+    </div>
+    ${BASE.categories.map(cat => {
+      const items = BASE.assets.filter(a => a.cat === cat.id);
+      if (!items.length) return '';
+      return `<div class="mb-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="icon-box ${cat.bg}" style="width:28px;height:28px"><i data-lucide="${cat.icon}" class="w-3.5 h-3.5"></i></div>
+          <h3 class="font-semibold text-sm">${cat.name}</h3>
+          <span class="text-xs text-slate-400 ml-auto">${conv(cat.value)}</span>
+        </div>
+        <div class="space-y-2">
+          ${items.map(a => `
+            <div class="wa-card p-3.5 flex items-center justify-between">
+              <div class="min-w-0">
+                <p class="font-medium text-sm truncate">${a.name}</p>
+                <p class="text-xs text-slate-400">${a.location || a.weight || (a.rate?a.rate+'%':'')}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <p class="font-semibold text-sm">${conv(a.value)}</p>
+                <button onclick="showToast('Edit: ${a.name}')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-wa-700">
+                  <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
+                </button>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+    }).join('')}
+    <h3 class="font-semibold text-sm text-red-500 mb-2">Liabilities</h3>
+    <div class="space-y-2">
+      ${BASE.liabilities.map(l => `
+        <div class="wa-card p-3.5 flex items-center justify-between">
+          <div>
+            <p class="font-medium text-sm">${l.name}</p>
+            <p class="text-xs text-slate-400">EMI ${convFull(l.emi)}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <p class="font-semibold text-sm text-red-500">${conv(l.outstanding)}</p>
+            <button onclick="showToast('Edit liability')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-wa-700">
+              <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
+            </button>
+          </div>
+        </div>`).join('')}
+    </div>
+  `;
+  lucide.createIcons();
+}
 
-        lucide.createIcons();
-      }, 50);
-    }
+/* ===================== ADD ===================== */
+function renderAdd() {
+  const cats = [
+    {name:'Property / Real Estate', icon:'building-2', desc:'House, flat, land'},
+    {name:'Gold & Jewellery', icon:'gem', desc:'Physical gold, SGB'},
+    {name:'Fixed Deposit', icon:'landmark', desc:'Bank FD, RD'},
+    {name:'Stocks & Mutual Funds', icon:'trending-up', desc:'Shares, MF, ETF'},
+    {name:'Vehicles', icon:'car', desc:'Car, bike'},
+    {name:'Cash & Bank', icon:'piggy-bank', desc:'Savings, liquid'},
+    {name:'Liability / Loan', icon:'credit-card', desc:'Home loan, personal loan'},
+    {name:'Income', icon:'arrow-down-circle', desc:'Salary, rent, interest'},
+    {name:'Expense', icon:'arrow-up-circle', desc:'Bills, shopping, fees'}
+  ];
+  document.getElementById('mainContent').innerHTML = `
+    <h2 class="text-lg font-bold mb-1">Add New</h2>
+    <p class="text-sm text-slate-500 mb-4">Choose category or use Chat for voice / paste</p>
+    <div class="space-y-2.5">
+      ${cats.map(c => `
+        <button onclick="showToast('Form for ${c.name} coming soon')" class="wa-card p-4 w-full flex items-center gap-3 text-left">
+          <div class="icon-box bg-[#E7F8F2] text-[#128C7E]"><i data-lucide="${c.icon}" class="w-5 h-5"></i></div>
+          <div>
+            <p class="font-semibold text-sm">${c.name}</p>
+            <p class="text-xs text-slate-400">${c.desc}</p>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 ml-auto"></i>
+        </button>`).join('')}
+    </div>
+  `;
+  lucide.createIcons();
+}
 
-    // ========== WEALTH ==========
-    function renderWealth() {
-      document.getElementById('mainContent').innerHTML = `
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-bold">All Assets</h2>
-          <button onclick="render('add')" class="text-sm font-semibold text-[#128C7E] flex items-center gap-1">
-            <i data-lucide="plus" class="w-4 h-4"></i> Add
+/* ===================== CHATBOT ===================== */
+function renderChat() {
+  document.getElementById('mainContent').innerHTML = `
+    <div class="flex flex-col h-[calc(100vh-160px)]">
+      <div class="mb-3">
+        <h2 class="text-lg font-bold">Wealth Assistant</h2>
+        <p class="text-xs text-slate-500">Paste SMS / bank text or use voice</p>
+      </div>
+
+      <div id="chatBox" class="flex-1 overflow-y-auto space-y-3 mb-3 pr-1">
+        <div class="chat-bubble chat-bot">
+          Hi! I can help you update WealthApp.<br><br>
+          • Paste any credit/debit SMS or bank statement<br>
+          • Or speak: “Add grocery expense 2500”<br>
+          • “Update gold to 3.5 lakh”<br>
+          • “Show my net worth”
+        </div>
+        ${chatHistory.map(m => `<div class="chat-bubble ${m.role==='user'?'chat-user':'chat-bot'}">${m.text}</div>`).join('')}
+      </div>
+
+      <div class="space-y-2">
+        <textarea id="chatInput" rows="2" placeholder="Paste SMS / statement or type command..." class="w-full rounded-xl border border-slate-200 dark:border-wa-700 bg-white dark:bg-wa-800 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#25D366]"></textarea>
+        <div class="flex gap-2">
+          <button onclick="startVoice()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-wa-700 text-sm font-medium flex items-center justify-center gap-2">
+            <i data-lucide="mic" class="w-4 h-4"></i> Voice
+          </button>
+          <button onclick="sendChat()" class="flex-1 py-2.5 rounded-xl bg-[#25D366] text-white text-sm font-semibold flex items-center justify-center gap-2">
+            <i data-lucide="send" class="w-4 h-4"></i> Send
           </button>
         </div>
-        ${BASE.categories.map(cat => {
-          const items = BASE.assets.filter(a => a.cat === cat.id);
-          if (!items.length) return '';
-          return `
-            <div class="mb-5">
-              <div class="flex items-center gap-2 mb-2">
-                <div class="icon-box ${cat.bg}" style="width:28px;height:28px">
-                  <i data-lucide="${cat.icon}" class="w-3.5 h-3.5"></i>
-                </div>
-                <h3 class="font-semibold text-sm">${cat.name}</h3>
-                <span class="text-xs text-slate-400 ml-auto">${conv(cat.value)}</span>
-              </div>
-              <div class="space-y-2">
-                ${items.map(a => `
-                  <div class="wa-card p-3.5 flex items-center justify-between">
-                    <div class="flex-1 min-w-0">
-                      <p class="font-medium text-sm truncate">${a.name}</p>
-                      <p class="text-xs text-slate-400">${a.location || a.weight || (a.rate ? a.rate+'%' : '')}</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <p class="font-semibold text-sm">${conv(a.value)}</p>
-                      <button onclick="showToast('Edit: ${a.name}')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-wa-700">
-                        <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
-                      </button>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>`;
-        }).join('')}
+      </div>
+    </div>
+  `;
+  lucide.createIcons();
+  const box = document.getElementById('chatBox');
+  if (box) box.scrollTop = box.scrollHeight;
+}
 
-        <div class="mt-2">
-          <h3 class="font-semibold text-sm text-red-500 mb-2">Liabilities</h3>
-          <div class="space-y-2">
-            ${BASE.liabilities.map(l => `
-              <div class="wa-card p-3.5 flex items-center justify-between">
-                <div>
-                  <p class="font-medium text-sm">${l.name}</p>
-                  <p class="text-xs text-slate-400">EMI ${convFull(l.emi)}</p>
-                </div>
-                <div class="flex items-center gap-2">
-                  <p class="font-semibold text-sm text-red-500">${conv(l.outstanding)}</p>
-                  <button onclick="showToast('Edit liability')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-wa-700">
-                    <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
-                  </button>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-      lucide.createIcons();
-    }
+function addChat(role, text) {
+  chatHistory.push({ role, text });
+  if (currentView === 'chat') renderChat();
+}
 
-    // ========== ADD ==========
-    function renderAdd() {
-      const cats = [
-        { name: 'Property / Real Estate', icon: 'building-2', desc: 'House, flat, land' },
-        { name: 'Gold & Jewellery', icon: 'gem', desc: 'Physical gold, SGB, coins' },
-        { name: 'Fixed Deposit', icon: 'landmark', desc: 'Bank FD, RD' },
-        { name: 'Stocks & Mutual Funds', icon: 'trending-up', desc: 'Shares, MF, ETF' },
-        { name: 'Vehicles', icon: 'car', desc: 'Car, bike, motorcycle' },
-        { name: 'Cash & Bank', icon: 'piggy-bank', desc: 'Savings, liquid funds' },
-        { name: 'Other Assets', icon: 'package', desc: 'Crypto, art, etc.' },
-        { name: 'Liability / Loan', icon: 'credit-card', desc: 'Home loan, personal loan' },
-        { name: 'Income Entry', icon: 'arrow-down-circle', desc: 'Salary, rent, interest' },
-        { name: 'Expense Entry', icon: 'arrow-up-circle', desc: 'Bills, shopping, fees' }
-      ];
-      document.getElementById('mainContent').innerHTML = `
-        <h2 class="text-lg font-bold mb-1">Add New</h2>
-        <p class="text-sm text-slate-500 mb-4">Choose a category</p>
-        <div class="space-y-2.5">
-          ${cats.map(c => `
-            <button onclick="showToast('Add form for ${c.name} will open here')" class="wa-card p-4 w-full flex items-center gap-3 text-left">
-              <div class="icon-box bg-[#E7F8F2] text-[#128C7E]">
-                <i data-lucide="${c.icon}" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="font-semibold text-sm">${c.name}</p>
-                <p class="text-xs text-slate-400">${c.desc}</p>
-              </div>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 ml-auto"></i>
-            </button>
-          `).join('')}
-        </div>
-      `;
-      lucide.createIcons();
-    }
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = (input?.value || '').trim();
+  if (!text) return;
+  addChat('user', text);
+  input.value = '';
+  processCommand(text);
+}
 
-    // ========== CASHFLOW ==========
-    function renderCashflow() {
-      const income = BASE.income.reduce((s,i)=>s+i.amount,0);
-      const expense = BASE.expenses.reduce((s,e)=>s+e.amount,0);
-      document.getElementById('mainContent').innerHTML = `
-        <h2 class="text-lg font-bold mb-4">Cashflow — This Month</h2>
-        <div class="grid grid-cols-2 gap-3 mb-4">
-          <div class="wa-card p-4">
-            <p class="text-xs text-slate-500">Total Income</p>
-            <p class="text-xl font-bold text-emerald-600">${conv(income)}</p>
-          </div>
-          <div class="wa-card p-4">
-            <p class="text-xs text-slate-500">Total Expenses</p>
-            <p class="text-xl font-bold text-red-500">${conv(expense)}</p>
-          </div>
-        </div>
-        <h3 class="font-semibold text-sm mb-2 text-emerald-600">Income</h3>
-        <div class="space-y-2 mb-5">
-          ${BASE.income.map(i => `
-            <div class="wa-card p-3 flex justify-between items-center">
-              <span class="text-sm">${i.name}</span>
-              <div class="flex items-center gap-2">
-                <span class="font-semibold text-emerald-600 text-sm">+${convFull(i.amount)}</span>
-                <button onclick="showToast('Edit income')" class="p-1 rounded bg-slate-100 dark:bg-wa-700">
-                  <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
-                </button>
-              </div>
-            </div>
-          `).join('')}
-        </div>
-        <h3 class="font-semibold text-sm mb-2 text-red-500">Expenses</h3>
-        <div class="space-y-2">
-          ${BASE.expenses.map(e => `
-            <div class="wa-card p-3 flex justify-between items-center">
-              <div>
-                <p class="text-sm">${e.name}</p>
-                <p class="text-[10px] text-slate-400">${e.cat}</p>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="font-semibold text-red-500 text-sm">-${convFull(e.amount)}</span>
-                <button onclick="showToast('Edit expense')" class="p-1 rounded bg-slate-100 dark:bg-wa-700">
-                  <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
-                </button>
-              </div>
-            </div>
-          `).join('')}
-        </div>
-      `;
-      lucide.createIcons();
-    }
+function startVoice() {
+  if (!recognition) {
+    showToast('Voice not supported on this browser');
+    return;
+  }
+  showToast('Listening... Speak now');
+  recognition.start();
+}
 
-    // ========== MORE ==========
-    function renderMore() {
-      document.getElementById('mainContent').innerHTML = `
-        <h2 class="text-lg font-bold mb-4">More</h2>
-        <div class="space-y-2">
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="credit-card" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">Credit Cards & Reminders</span>
-          </div>
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="file-text" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">Documents & Links</span>
-          </div>
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="bar-chart-2" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">Reports & Export</span>
-          </div>
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="settings" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">Settings</span>
-          </div>
-        </div>
-        <p class="text-xs text-slate-400 text-center mt-8">WealthApp v0.4 • 27 Lakh base</p>
-      `;
-      lucide.createIcons();
-    }
+/* Simple command + SMS parser */
+function processCommand(text) {
+  const lower = text.toLowerCase();
+  let reply = '';
 
-    function showToast(msg) {
-      document.getElementById('toastMsg').textContent = msg;
-      const t = document.getElementById('toast');
-      t.classList.remove('hidden');
-      setTimeout(() => t.classList.add('hidden'), 2200);
+  // Detect amount
+  const amountMatch = text.match(/(?:rs\.?|inr|₹|\$)?\s*([\d,]+(?:\.\d+)?)\s*(?:lakh|lac|l|cr|crore)?/i);
+  let amount = amountMatch ? parseFloat(amountMatch[1].replace(/,/g,'')) : null;
+  if (amount && /lakh|lac|\bl\b/i.test(text)) amount *= 100000;
+  if (amount && /crore|\bcr\b/i.test(text)) amount *= 10000000;
+
+  // Credit / Debit detection from SMS style
+  const isCredit = /(?:credited|credit|received|cr\b|deposit)/i.test(text);
+  const isDebit  = /(?:debited|debit|spent|paid|dr\b|withdrawn)/i.test(text);
+
+  if (isCredit && amount) {
+    BASE.income.push({ name: 'SMS Credit', amount });
+    reply = `Detected credit of ${convFull(amount)}. Added to Income.`;
+  } else if (isDebit && amount) {
+    let cat = 'Other';
+    if (/grocery|supermarket|bigbasket|blinkit/i.test(text)) cat = 'Grocery';
+    else if (/fuel|petrol|diesel/i.test(text)) cat = 'Transport';
+    else if (/swiggy|zomato|restaurant|dining/i.test(text)) cat = 'Dining';
+    else if (/amazon|flipkart|myntra|shopping/i.test(text)) cat = 'Shopping';
+    BASE.expenses.push({ name: 'SMS Debit', amount, cat });
+    reply = `Detected debit of ${convFull(amount)} (${cat}). Added to Expenses.`;
+  }
+  // Voice style commands
+  else if (/add.*(expense|spent)/i.test(lower) && amount) {
+    let cat = 'Other';
+    if (/grocery/i.test(lower)) cat = 'Grocery';
+    if (/fuel|petrol/i.test(lower)) cat = 'Transport';
+    if (/food|dining|restaurant/i.test(lower)) cat = 'Dining';
+    BASE.expenses.push({ name: 'Voice Expense', amount, cat });
+    reply = `Added expense of ${convFull(amount)} under ${cat}.`;
+  }
+  else if (/add.*(income|salary|received)/i.test(lower) && amount) {
+    BASE.income.push({ name: 'Voice Income', amount });
+    reply = `Added income of ${convFull(amount)}.`;
+  }
+  else if (/net worth|total wealth|my wealth/i.test(lower)) {
+    const net = BASE.assetsTotal - BASE.liabilitiesTotal;
+    reply = `Your current Net Worth is ${conv(net)}.`;
+  }
+  else if (/surplus|saving/i.test(lower)) {
+    const income = BASE.income.reduce((s,i)=>s+i.amount,0);
+    const expense = BASE.expenses.reduce((s,e)=>s+e.amount,0);
+    reply = `This month surplus is ${conv(income - expense)}.`;
+  }
+  else if (/gold/i.test(lower) && amount) {
+    const gold = BASE.categories.find(c => c.id === 'gold');
+    if (gold) {
+      gold.value = amount;
+      reply = `Updated Gold & Jewellery value to ${conv(amount)}.`;
     }
-  </script>
+  }
+  else {
+    reply = `I understood: "${text}".\n\nFor best results try:\n• Paste a bank SMS\n• “Add grocery expense 2500”\n• “Show my net worth”\n• “Update gold to 3.2 lakh”`;
+  }
+
+  setTimeout(() => {
+    addChat('bot', reply);
+    showToast('Updated');
+  }, 400);
+}
+
+/* ===================== MORE ===================== */
+function renderMore() {
+  document.getElementById('mainContent').innerHTML = `
+    <h2 class="text-lg font-bold mb-4">More</h2>
+    <div class="space-y-2">
+      <div class="wa-card p-4 flex items-center gap-3" onclick="render('chat')">
+        <i data-lucide="message-circle" class="w-5 h-5 text-[#128C7E]"></i>
+        <span class="font-medium text-sm">Wealth Assistant (Chat + Voice)</span>
+      </div>
+      <div class="wa-card p-4 flex items-center gap-3">
+        <i data-lucide="credit-card" class="w-5 h-5 text-[#128C7E]"></i>
+        <span class="font-medium text-sm">Credit Cards & Reminders</span>
+      </div>
+      <div class="wa-card p-4 flex items-center gap-3">
+        <i data-lucide="file-text" class="w-5 h-5 text-[#128C7E]"></i>
+        <span class="font-medium text-sm">Documents & Links</span>
+      </div>
+      <div class="wa-card p-4 flex items-center gap-3">
+        <i data-lucide="settings" class="w-5 h-5 text-[#128C7E]"></i>
+        <span class="font-medium text-sm">Settings</span>
+      </div>
+    </div>
+    <p class="text-xs text-slate-400 text-center mt-8">WealthApp v0.5 • Chat + Voice</p>
+  `;
+  lucide.createIcons();
+}
+
+function showToast(msg) {
+  document.getElementById('toastMsg').textContent = msg;
+  const t = document.getElementById('toast');
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 2200);
+}
+</script>
 </body>
 </html>
