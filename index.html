@@ -19,16 +19,9 @@
         extend: {
           colors: {
             wa: {
-              50: '#E7F8F2',
-              100: '#D1F0E5',
-              200: '#A3E0CB',
-              300: '#6FCFB0',
-              400: '#25D366',
-              500: '#128C7E',
-              600: '#075E54',
-              700: '#054C44',
-              800: '#033D37',
-              900: '#022E29',
+              50: '#E7F8F2', 100: '#D1F0E5', 400: '#25D366',
+              500: '#128C7E', 600: '#075E54', 700: '#054C44',
+              800: '#033D37', 900: '#022E29'
             }
           },
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
@@ -42,34 +35,25 @@
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
     .wa-card {
-      background: white;
-      border-radius: 1.25rem;
+      background: white; border-radius: 1.25rem;
       box-shadow: 0 2px 12px rgba(7, 94, 84, 0.06);
       border: 1px solid #E7F8F2;
     }
     .dark .wa-card {
-      background: #033D37;
-      border-color: #054C44;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      background: #033D37; border-color: #054C44;
     }
     .nav-btn { color: #64748b; }
     .nav-btn.active { color: #128C7E; background: rgba(37, 211, 102, 0.12); }
-    .dark .nav-btn { color: #94a3b8; }
     .dark .nav-btn.active { color: #25D366; background: rgba(37, 211, 102, 0.15); }
-    .green-value {
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .view-enter { animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
     .icon-box {
-      width: 44px; height: 44px; border-radius: 12px;
+      width: 42px; height: 42px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .progress-bar { height: 8px; border-radius: 99px; background: #E7F8F2; overflow: hidden; }
     .dark .progress-bar { background: #054C44; }
-    .progress-fill { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
+    .progress-fill { height: 100%; border-radius: 99px; }
+    .view-enter { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   </style>
 </head>
 <body class="h-full bg-slate-50 dark:bg-wa-900 text-slate-900 dark:text-slate-100 antialiased">
@@ -80,11 +64,9 @@
     <header class="sticky top-0 z-40 bg-[#075E54] text-white shadow-lg">
       <div class="px-4 py-3.5 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-[#25D366] flex items-center justify-center">
-            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-          </div>
+          <div class="w-9 h-9 rounded-full bg-[#25D366] flex items-center justify-center font-bold text-lg">W</div>
           <div>
-            <h1 class="text-lg font-bold tracking-tight">WealthApp</h1>
+            <h1 class="text-lg font-bold">WealthApp</h1>
             <p class="text-[10px] text-green-200 -mt-0.5">Your Money, Clearly</p>
           </div>
         </div>
@@ -92,10 +74,6 @@
           <button id="themeToggle" class="p-2 rounded-full hover:bg-white/10">
             <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
             <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
-          </button>
-          <button class="p-2 rounded-full hover:bg-white/10 relative">
-            <i data-lucide="bell" class="w-5 h-5"></i>
-            <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-400 rounded-full"></span>
           </button>
         </div>
       </div>
@@ -105,31 +83,29 @@
 
     <!-- Bottom Nav -->
     <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-wa-800 border-t border-slate-200 dark:border-wa-700">
-      <div class="max-w-[900px] mx-auto">
-        <div class="flex items-center justify-around py-2">
-          <button data-view="dashboard" class="nav-btn active flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-            <span class="text-[10px] font-medium">Home</span>
-          </button>
-          <button data-view="wealth" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-            <i data-lucide="wallet" class="w-5 h-5"></i>
-            <span class="text-[10px] font-medium">Wealth</span>
-          </button>
-          <button data-view="add" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-            <div class="w-10 h-10 -mt-5 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg">
-              <i data-lucide="plus" class="w-6 h-6"></i>
-            </div>
-            <span class="text-[10px] font-medium mt-0.5">Add</span>
-          </button>
-          <button data-view="cashflow" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-            <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
-            <span class="text-[10px] font-medium">Cashflow</span>
-          </button>
-          <button data-view="more" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
-            <i data-lucide="menu" class="w-5 h-5"></i>
-            <span class="text-[10px] font-medium">More</span>
-          </button>
-        </div>
+      <div class="max-w-[900px] mx-auto flex items-center justify-around py-2">
+        <button data-view="dashboard" class="nav-btn active flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          <span class="text-[10px] font-medium">Home</span>
+        </button>
+        <button data-view="wealth" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
+          <i data-lucide="wallet" class="w-5 h-5"></i>
+          <span class="text-[10px] font-medium">Wealth</span>
+        </button>
+        <button data-view="add" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
+          <div class="w-10 h-10 -mt-5 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg">
+            <i data-lucide="plus" class="w-6 h-6"></i>
+          </div>
+          <span class="text-[10px] font-medium mt-0.5">Add</span>
+        </button>
+        <button data-view="cashflow" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
+          <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
+          <span class="text-[10px] font-medium">Cashflow</span>
+        </button>
+        <button data-view="more" class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px]">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+          <span class="text-[10px] font-medium">More</span>
+        </button>
       </div>
     </nav>
   </div>
@@ -142,7 +118,6 @@
   </div>
 
   <script>
-    // ========== DATA ==========
     const DATA = {
       netWorth: 48750000,
       assetsTotal: 54280000,
@@ -158,10 +133,10 @@
       ],
       assets: [
         { id: 1, cat: 'property', name: 'Skyline Residency 3BHK', value: 18500000, bought: 14200000, location: 'Pune' },
-        { id: 2, cat: 'property', name: 'Rental Flat Koregaon', value: 10000000, bought: 7800000, location: 'Pune', rent: 42000 },
+        { id: 2, cat: 'property', name: 'Rental Flat Koregaon', value: 10000000, bought: 7800000, location: 'Pune' },
         { id: 3, cat: 'gold', name: '22K Jewellery', value: 2850000, weight: '385g' },
         { id: 4, cat: 'gold', name: 'SGB + Coins', value: 1300000 },
-        { id: 5, cat: 'fd', name: 'HDFC Bank FD', value: 3500000, rate: 7.25, maturity: 'Nov 2026' },
+        { id: 5, cat: 'fd', name: 'HDFC Bank FD', value: 3500000, rate: 7.25 },
         { id: 6, cat: 'fd', name: 'SBI Tax Saver FD', value: 2700000, rate: 6.90 },
         { id: 7, cat: 'stocks', name: 'Equity Portfolio', value: 9840000, invested: 7120000 },
         { id: 8, cat: 'vehicles', name: 'Mercedes GLC 300', value: 6200000, bought: 7850000 },
@@ -197,21 +172,18 @@
       return '₹' + n.toLocaleString('en-IN');
     }
     function fmtFull(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
-    function pct(part, total) { return total ? ((part/total)*100).toFixed(1) : 0; }
+    function pct(part, total) { return total ? ((part/total)*100).toFixed(1) : '0'; }
 
     let currentView = 'dashboard';
     let chart = null;
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Theme
       if (localStorage.getItem('wa-theme') === 'dark') document.documentElement.classList.add('dark');
       document.getElementById('themeToggle').onclick = () => {
         document.documentElement.classList.toggle('dark');
         localStorage.setItem('wa-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
         if (currentView === 'dashboard') renderDashboard();
       };
-
-      // Nav
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.onclick = () => {
           document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -219,7 +191,6 @@
           render(btn.dataset.view);
         };
       });
-
       render('dashboard');
       setTimeout(() => lucide.createIcons(), 80);
     });
@@ -238,7 +209,6 @@
       setTimeout(() => lucide.createIcons(), 50);
     }
 
-    // ========== DASHBOARD ==========
     function renderDashboard() {
       const total = DATA.assetsTotal;
       const income = DATA.income.reduce((s,i)=>s+i.amount,0);
@@ -246,47 +216,27 @@
       const surplus = income - expense;
 
       document.getElementById('mainContent').innerHTML = `
-        <!-- Net Worth Hero -->
         <div class="wa-card p-5 mb-4 bg-gradient-to-br from-[#075E54] to-[#128C7E] text-white border-0">
           <p class="text-sm text-green-100 mb-1">Total Net Worth</p>
-          <h2 class="text-3xl font-bold tracking-tight">${fmt(DATA.netWorth)}</h2>
+          <h2 class="text-3xl font-bold">${fmt(DATA.netWorth)}</h2>
           <div class="flex items-center gap-2 mt-2 text-sm">
             <span class="bg-white/20 px-2 py-0.5 rounded-full text-xs font-medium">↑ ${DATA.change}% this month</span>
           </div>
           <div class="grid grid-cols-2 gap-4 mt-5 pt-4 border-t border-white/20">
-            <div>
-              <p class="text-xs text-green-100">Assets</p>
-              <p class="font-semibold text-lg">${fmt(DATA.assetsTotal)}</p>
-            </div>
-            <div>
-              <p class="text-xs text-green-100">Liabilities</p>
-              <p class="font-semibold text-lg text-red-200">${fmt(DATA.liabilitiesTotal)}</p>
-            </div>
+            <div><p class="text-xs text-green-100">Assets</p><p class="font-semibold text-lg">${fmt(DATA.assetsTotal)}</p></div>
+            <div><p class="text-xs text-green-100">Liabilities</p><p class="font-semibold text-lg text-red-200">${fmt(DATA.liabilitiesTotal)}</p></div>
           </div>
         </div>
 
-        <!-- Monthly Snapshot -->
         <div class="grid grid-cols-3 gap-2.5 mb-4">
-          <div class="wa-card p-3 text-center">
-            <p class="text-[10px] text-slate-500 mb-0.5">Income</p>
-            <p class="font-bold text-emerald-600 text-sm">${fmt(income)}</p>
-          </div>
-          <div class="wa-card p-3 text-center">
-            <p class="text-[10px] text-slate-500 mb-0.5">Expenses</p>
-            <p class="font-bold text-red-500 text-sm">${fmt(expense)}</p>
-          </div>
-          <div class="wa-card p-3 text-center">
-            <p class="text-[10px] text-slate-500 mb-0.5">Surplus</p>
-            <p class="font-bold text-[#128C7E] text-sm">${fmt(surplus)}</p>
-          </div>
+          <div class="wa-card p-3 text-center"><p class="text-[10px] text-slate-500">Income</p><p class="font-bold text-emerald-600 text-sm">${fmt(income)}</p></div>
+          <div class="wa-card p-3 text-center"><p class="text-[10px] text-slate-500">Expenses</p><p class="font-bold text-red-500 text-sm">${fmt(expense)}</p></div>
+          <div class="wa-card p-3 text-center"><p class="text-[10px] text-slate-500">Surplus</p><p class="font-bold text-[#128C7E] text-sm">${fmt(surplus)}</p></div>
         </div>
 
-        <!-- Category Breakdown with % -->
+        <!-- Category % list -->
         <div class="wa-card p-4 mb-4">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="font-semibold text-sm">Wealth Breakdown</h3>
-            <span class="text-xs text-slate-400">by value</span>
-          </div>
+          <h3 class="font-semibold text-sm mb-3">Wealth by Category</h3>
           <div class="space-y-3">
             ${DATA.categories.map(c => {
               const p = pct(c.value, total);
@@ -294,35 +244,40 @@
                 <div>
                   <div class="flex items-center justify-between mb-1">
                     <div class="flex items-center gap-2">
-                      <div class="icon-box ${c.bg}" style="width:32px;height:32px">
-                        <i data-lucide="${c.icon}" class="w-4 h-4"></i>
-                      </div>
+                      <div class="icon-box ${c.bg}" style="width:30px;height:30px"><i data-lucide="${c.icon}" class="w-3.5 h-3.5"></i></div>
                       <span class="text-sm font-medium">${c.name}</span>
                     </div>
                     <div class="text-right">
                       <p class="text-sm font-semibold">${fmt(c.value)}</p>
-                      <p class="text-[10px] text-slate-400">${p}%</p>
+                      <p class="text-[11px] font-medium text-[#128C7E]">${p}%</p>
                     </div>
                   </div>
-                  <div class="progress-bar">
-                    <div class="progress-fill" style="width:${p}%; background:${c.color}"></div>
-                  </div>
-                </div>
-              `;
+                  <div class="progress-bar"><div class="progress-fill" style="width:${p}%;background:${c.color}"></div></div>
+                </div>`;
             }).join('')}
           </div>
         </div>
 
-        <!-- Allocation Chart -->
+        <!-- Pie chart with legend that shows % -->
         <div class="wa-card p-4 mb-4">
-          <h3 class="font-semibold text-sm mb-3">Allocation Chart</h3>
-          <div style="height:200px"><canvas id="allocChart"></canvas></div>
+          <h3 class="font-semibold text-sm mb-3">Allocation</h3>
+          <div style="height:210px" class="mb-3"><canvas id="allocChart"></canvas></div>
+          <div class="grid grid-cols-2 gap-x-3 gap-y-2">
+            ${DATA.categories.map(c => {
+              const p = pct(c.value, total);
+              return `
+                <div class="flex items-center gap-2 text-xs">
+                  <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${c.color}"></span>
+                  <span class="truncate">${c.name}</span>
+                  <span class="ml-auto font-semibold">${p}%</span>
+                </div>`;
+            }).join('')}
+          </div>
         </div>
 
-        <!-- Quick Tips -->
-        <div class="wa-card p-4 mb-2 border-l-4 border-[#25D366]">
+        <div class="wa-card p-4 border-l-4 border-[#25D366]">
           <p class="text-sm font-medium mb-1">💡 Smart Tip</p>
-          <p class="text-xs text-slate-500 leading-relaxed">You have ₹1.26 L surplus this month. Consider increasing SIP or parking in liquid funds.</p>
+          <p class="text-xs text-slate-500">You have ${fmt(surplus)} surplus this month. Consider increasing SIP or liquid funds.</p>
         </div>
       `;
 
@@ -337,14 +292,25 @@
                 data: DATA.categories.map(c => c.value),
                 backgroundColor: DATA.categories.map(c => c.color),
                 borderWidth: 0,
-                hoverOffset: 6
+                hoverOffset: 8
               }]
             },
             options: {
               responsive: true,
               maintainAspectRatio: false,
-              cutout: '65%',
-              plugins: { legend: { display: false } }
+              cutout: '60%',
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    label: function(ctx) {
+                      const total = ctx.dataset.data.reduce((a,b)=>a+b,0);
+                      const p = ((ctx.raw/total)*100).toFixed(1);
+                      return ` ${ctx.label}: ${fmt(ctx.raw)} (${p}%)`;
+                    }
+                  }
+                }
+              }
             }
           });
         }
@@ -352,7 +318,6 @@
       }, 40);
     }
 
-    // ========== WEALTH ==========
     function renderWealth() {
       document.getElementById('mainContent').innerHTML = `
         <div class="flex items-center justify-between mb-4">
@@ -361,34 +326,34 @@
             <i data-lucide="plus" class="w-4 h-4"></i> Add
           </button>
         </div>
-
         ${DATA.categories.map(cat => {
           const items = DATA.assets.filter(a => a.cat === cat.id);
           if (!items.length) return '';
           return `
             <div class="mb-5">
               <div class="flex items-center gap-2 mb-2">
-                <div class="icon-box ${cat.bg}" style="width:28px;height:28px">
-                  <i data-lucide="${cat.icon}" class="w-3.5 h-3.5"></i>
-                </div>
+                <div class="icon-box ${cat.bg}" style="width:28px;height:28px"><i data-lucide="${cat.icon}" class="w-3.5 h-3.5"></i></div>
                 <h3 class="font-semibold text-sm">${cat.name}</h3>
                 <span class="text-xs text-slate-400 ml-auto">${fmt(cat.value)}</span>
               </div>
               <div class="space-y-2">
                 ${items.map(a => `
                   <div class="wa-card p-3.5 flex items-center justify-between">
-                    <div>
-                      <p class="font-medium text-sm">${a.name}</p>
-                      <p class="text-xs text-slate-400">${a.location || a.weight || a.rate ? (a.rate ? a.rate + '%' : a.location || a.weight) : ''}</p>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-sm truncate">${a.name}</p>
+                      <p class="text-xs text-slate-400">${a.location || a.weight || (a.rate ? a.rate+'%' : '')}</p>
                     </div>
-                    <p class="font-semibold text-sm">${fmt(a.value)}</p>
+                    <div class="flex items-center gap-3">
+                      <p class="font-semibold text-sm">${fmt(a.value)}</p>
+                      <button onclick="showToast('Edit: ${a.name}')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-wa-700">
+                        <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
+                      </button>
+                    </div>
                   </div>
                 `).join('')}
               </div>
-            </div>
-          `;
+            </div>`;
         }).join('')}
-
         <div class="mt-2">
           <h3 class="font-semibold text-sm text-red-500 mb-2">Liabilities</h3>
           <div class="space-y-2">
@@ -398,7 +363,12 @@
                   <p class="font-medium text-sm">${l.name}</p>
                   <p class="text-xs text-slate-400">EMI ${fmtFull(l.emi)}</p>
                 </div>
-                <p class="font-semibold text-sm text-red-500">${fmt(l.outstanding)}</p>
+                <div class="flex items-center gap-3">
+                  <p class="font-semibold text-sm text-red-500">${fmt(l.outstanding)}</p>
+                  <button onclick="showToast('Edit liability')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-wa-700">
+                    <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
+                  </button>
+                </div>
               </div>
             `).join('')}
           </div>
@@ -407,30 +377,26 @@
       lucide.createIcons();
     }
 
-    // ========== ADD ==========
     function renderAdd() {
       const cats = [
-        { id: 'property', name: 'Property / Real Estate', icon: 'building-2', desc: 'House, flat, land, commercial' },
+        { id: 'property', name: 'Property / Real Estate', icon: 'building-2', desc: 'House, flat, land' },
         { id: 'gold', name: 'Gold & Jewellery', icon: 'gem', desc: 'Physical gold, SGB, coins' },
-        { id: 'fd', name: 'Fixed Deposit', icon: 'landmark', desc: 'Bank FD, RD, bonds' },
-        { id: 'stocks', name: 'Stocks & Mutual Funds', icon: 'trending-up', desc: 'Shares, MF, ETF, bonds' },
+        { id: 'fd', name: 'Fixed Deposit', icon: 'landmark', desc: 'Bank FD, RD' },
+        { id: 'stocks', name: 'Stocks & Mutual Funds', icon: 'trending-up', desc: 'Shares, MF, ETF' },
         { id: 'vehicles', name: 'Vehicles', icon: 'car', desc: 'Car, bike, motorcycle' },
         { id: 'cash', name: 'Cash & Bank', icon: 'piggy-bank', desc: 'Savings, liquid funds' },
-        { id: 'other', name: 'Other Assets', icon: 'package', desc: 'Crypto, art, collectibles' },
-        { id: 'liability', name: 'Liability / Loan', icon: 'credit-card', desc: 'Home loan, car loan, card' },
+        { id: 'other', name: 'Other Assets', icon: 'package', desc: 'Crypto, art, etc.' },
+        { id: 'liability', name: 'Liability / Loan', icon: 'credit-card', desc: 'Home loan, car loan' },
         { id: 'income', name: 'Income Entry', icon: 'arrow-down-circle', desc: 'Salary, rent, interest' },
         { id: 'expense', name: 'Expense Entry', icon: 'arrow-up-circle', desc: 'Bills, shopping, fees' }
       ];
-
       document.getElementById('mainContent').innerHTML = `
         <h2 class="text-lg font-bold mb-1">Add New</h2>
-        <p class="text-sm text-slate-500 mb-4">Choose a category to add</p>
+        <p class="text-sm text-slate-500 mb-4">Choose a category</p>
         <div class="space-y-2.5">
           ${cats.map(c => `
-            <button onclick="showToast('Add ${c.name} form coming soon')" class="wa-card p-4 w-full flex items-center gap-3 text-left active:scale-[0.98] transition">
-              <div class="icon-box bg-[#E7F8F2] text-[#128C7E]">
-                <i data-lucide="${c.icon}" class="w-5 h-5"></i>
-              </div>
+            <button onclick="showToast('Add form for ${c.name} coming next')" class="wa-card p-4 w-full flex items-center gap-3 text-left">
+              <div class="icon-box bg-[#E7F8F2] text-[#128C7E]"><i data-lucide="${c.icon}" class="w-5 h-5"></i></div>
               <div>
                 <p class="font-semibold text-sm">${c.name}</p>
                 <p class="text-xs text-slate-400">${c.desc}</p>
@@ -443,76 +409,53 @@
       lucide.createIcons();
     }
 
-    // ========== CASHFLOW ==========
     function renderCashflow() {
       const income = DATA.income.reduce((s,i)=>s+i.amount,0);
       const expense = DATA.expenses.reduce((s,e)=>s+e.amount,0);
-
       document.getElementById('mainContent').innerHTML = `
         <h2 class="text-lg font-bold mb-4">Cashflow — August 2026</h2>
         <div class="grid grid-cols-2 gap-3 mb-4">
-          <div class="wa-card p-4">
-            <p class="text-xs text-slate-500">Total Income</p>
-            <p class="text-xl font-bold text-emerald-600">${fmt(income)}</p>
-          </div>
-          <div class="wa-card p-4">
-            <p class="text-xs text-slate-500">Total Expenses</p>
-            <p class="text-xl font-bold text-red-500">${fmt(expense)}</p>
-          </div>
+          <div class="wa-card p-4"><p class="text-xs text-slate-500">Total Income</p><p class="text-xl font-bold text-emerald-600">${fmt(income)}</p></div>
+          <div class="wa-card p-4"><p class="text-xs text-slate-500">Total Expenses</p><p class="text-xl font-bold text-red-500">${fmt(expense)}</p></div>
         </div>
-
         <h3 class="font-semibold text-sm mb-2 text-emerald-600">Income</h3>
         <div class="space-y-2 mb-5">
           ${DATA.income.map(i => `
             <div class="wa-card p-3 flex justify-between items-center">
               <span class="text-sm">${i.name}</span>
-              <span class="font-semibold text-emerald-600 text-sm">+${fmtFull(i.amount)}</span>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-emerald-600 text-sm">+${fmtFull(i.amount)}</span>
+                <button onclick="showToast('Edit income')" class="p-1 rounded bg-slate-100 dark:bg-wa-700"><i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i></button>
+              </div>
             </div>
           `).join('')}
         </div>
-
         <h3 class="font-semibold text-sm mb-2 text-red-500">Expenses</h3>
         <div class="space-y-2">
           ${DATA.expenses.map(e => `
             <div class="wa-card p-3 flex justify-between items-center">
-              <div>
-                <p class="text-sm">${e.name}</p>
-                <p class="text-[10px] text-slate-400">${e.cat}</p>
+              <div><p class="text-sm">${e.name}</p><p class="text-[10px] text-slate-400">${e.cat}</p></div>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-red-500 text-sm">-${fmtFull(e.amount)}</span>
+                <button onclick="showToast('Edit expense')" class="p-1 rounded bg-slate-100 dark:bg-wa-700"><i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i></button>
               </div>
-              <span class="font-semibold text-red-500 text-sm">-${fmtFull(e.amount)}</span>
             </div>
           `).join('')}
         </div>
       `;
+      lucide.createIcons();
     }
 
-    // ========== MORE ==========
     function renderMore() {
       document.getElementById('mainContent').innerHTML = `
         <h2 class="text-lg font-bold mb-4">More</h2>
         <div class="space-y-2">
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="credit-card" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">Credit Cards & Reminders</span>
-          </div>
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="file-text" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">Documents & Links</span>
-          </div>
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="bar-chart-2" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">Reports & Export</span>
-          </div>
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="settings" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">Settings</span>
-          </div>
-          <div class="wa-card p-4 flex items-center gap-3">
-            <i data-lucide="info" class="w-5 h-5 text-[#128C7E]"></i>
-            <span class="font-medium text-sm">About WealthApp</span>
-          </div>
+          <div class="wa-card p-4 flex items-center gap-3"><i data-lucide="credit-card" class="w-5 h-5 text-[#128C7E]"></i><span class="font-medium text-sm">Credit Cards & Reminders</span></div>
+          <div class="wa-card p-4 flex items-center gap-3"><i data-lucide="file-text" class="w-5 h-5 text-[#128C7E]"></i><span class="font-medium text-sm">Documents & Links</span></div>
+          <div class="wa-card p-4 flex items-center gap-3"><i data-lucide="bar-chart-2" class="w-5 h-5 text-[#128C7E]"></i><span class="font-medium text-sm">Reports & Export</span></div>
+          <div class="wa-card p-4 flex items-center gap-3"><i data-lucide="settings" class="w-5 h-5 text-[#128C7E]"></i><span class="font-medium text-sm">Settings</span></div>
         </div>
-        <p class="text-xs text-slate-400 text-center mt-8">WealthApp v0.2 • Draft</p>
+        <p class="text-xs text-slate-400 text-center mt-8">WealthApp v0.3</p>
       `;
       lucide.createIcons();
     }
@@ -521,7 +464,7 @@
       document.getElementById('toastMsg').textContent = msg;
       const t = document.getElementById('toast');
       t.classList.remove('hidden');
-      setTimeout(() => t.classList.add('hidden'), 2500);
+      setTimeout(() => t.classList.add('hidden'), 2200);
     }
   </script>
 </body>
