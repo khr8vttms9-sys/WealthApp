@@ -182,6 +182,217 @@
     textarea {
       font-size:16px;
     }
+
+/* ---- NEW DASHBOARD (from v1.0) ---- */
+.new-dashboard { padding-bottom: 8px; }
+.new-dashboard .welcome { margin-bottom: 20px; }
+.new-dashboard .welcome h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: #022E29; }
+.dark .new-dashboard .welcome h1 { color: #E7F8F2; }
+.new-dashboard .welcome p { color: #697386; font-size: 13px; margin-top: 4px; }
+.dark .new-dashboard .welcome p { color: #94a3b8; }
+
+.new-dashboard .cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+@media (min-width: 640px) {
+  .new-dashboard .cards { grid-template-columns: repeat(4, 1fr); }
+}
+
+.new-dashboard .card {
+  background: #fff;
+  border: 1px solid #E7F8F2;
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 12px rgba(7,94,84,.06);
+  padding: 16px;
+}
+.dark .new-dashboard .card {
+  background: #033D37;
+  border-color: #054C44;
+}
+
+.new-dashboard .metric-label { color: #697386; font-size: 12px; margin-bottom: 6px; font-weight: 600; }
+.dark .new-dashboard .metric-label { color: #94a3b8; }
+.new-dashboard .metric-value { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: #022E29; }
+.dark .new-dashboard .metric-value { color: #E7F8F2; }
+.new-dashboard .metric-sub { font-size: 11px; margin-top: 6px; color: #697386; }
+.dark .new-dashboard .metric-sub { color: #94a3b8; }
+
+.new-dashboard .dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+  .new-dashboard .dashboard-grid { grid-template-columns: 1.5fr 1fr; }
+}
+
+.new-dashboard .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.new-dashboard .card-title { font-weight: 700; font-size: 15px; color: #022E29; }
+.dark .new-dashboard .card-title { color: #E7F8F2; }
+.new-dashboard .card-action {
+  color: #128C7E;
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.new-dashboard .chart {
+  height: 200px;
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  padding: 20px 4px 24px;
+}
+.new-dashboard .bar-group {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  position: relative;
+}
+.new-dashboard .bar {
+  width: 70%;
+  max-width: 40px;
+  border-radius: 6px 6px 3px 3px;
+  min-height: 8px;
+  position: relative;
+  transition: height 0.4s ease;
+}
+.new-dashboard .bar-value {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  text-align: center;
+  font-size: 9px;
+  color: #697386;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.dark .new-dashboard .bar-value { color: #94a3b8; }
+.new-dashboard .bar-label {
+  position: absolute;
+  bottom: -20px;
+  font-size: 9px;
+  color: #697386;
+  text-align: center;
+  width: 100%;
+}
+.dark .new-dashboard .bar-label { color: #94a3b8; }
+
+.new-dashboard .allocation-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: center;
+}
+@media (min-width: 640px) {
+  .new-dashboard .allocation-layout { grid-template-columns: 140px 1fr; }
+}
+
+.new-dashboard .donut {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: auto;
+}
+.new-dashboard .donut-inner {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.dark .new-dashboard .donut-inner { background: #033D37; }
+.new-dashboard .donut-inner strong { font-size: 18px; display: block; color: #022E29; }
+.dark .new-dashboard .donut-inner strong { color: #E7F8F2; }
+.new-dashboard .donut-inner span { color: #697386; font-size: 10px; }
+.dark .new-dashboard .donut-inner span { color: #94a3b8; }
+
+.new-dashboard .legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.new-dashboard .legend-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  color: #022E29;
+}
+.dark .new-dashboard .legend-row { color: #E7F8F2; }
+.new-dashboard .legend-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.new-dashboard .legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.new-dashboard .table-card {
+  background: #fff;
+  border: 1px solid #E7F8F2;
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 12px rgba(7,94,84,.06);
+  overflow: hidden;
+}
+.dark .new-dashboard .table-card {
+  background: #033D37;
+  border-color: #054C44;
+}
+.new-dashboard .table-scroll { overflow-x: auto; }
+.new-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+.new-dashboard th,
+.new-dashboard td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #E7F8F2;
+  font-size: 13px;
+  color: #022E29;
+}
+.dark .new-dashboard th,
+.dark .new-dashboard td {
+  border-bottom-color: #054C44;
+  color: #E7F8F2;
+}
+.new-dashboard th {
+  background: #f8fafc;
+  color: #697386;
+  font-weight: 700;
+}
+.dark .new-dashboard th {
+  background: #054C44;
+  color: #94a3b8;
+}
+.new-dashboard tr:last-child td { border-bottom: 0; }
+.new-dashboard .positive { color: #25D366; }
+.new-dashboard .negative { color: #EF4444; }
+
   </style>
 </head>
 
@@ -218,8 +429,8 @@
           id="currencySelect"
           class="bg-white/20 text-white text-xs rounded-lg px-2 py-1.5 border-0 outline-none"
         >
-          <option value="INR">INR ₹</option>
           <option value="USD">USD $</option>
+          <option value="INR">INR ₹</option>
           <option value="EUR">EUR €</option>
           <option value="AED">AED</option>
           <option value="GBP">GBP £</option>
@@ -453,6 +664,7 @@ const DEFAULT_DATA = {
       name:'Home Loan',
       outstanding:380000,
       emi:18500,
+      rate:7.5,
       owner:'Self',
       note:''
     },
@@ -462,6 +674,7 @@ const DEFAULT_DATA = {
       name:'Personal Loan',
       outstanding:40000,
       emi:4500,
+      rate:14.0,
       owner:'Self',
       note:''
     }
@@ -630,7 +843,7 @@ const DEFAULT_DATA = {
 let DATA = loadData();
 
 let currency =
-  localStorage.getItem('wa-currency') || 'INR';
+  localStorage.getItem('wa-currency') || 'USD';
 
 let currentView = 'dashboard';
 
@@ -850,6 +1063,204 @@ function totals(){
 
   };
 
+}
+
+
+
+/* ---------------- LIABILITY STATS ---------------- */
+
+function liabilityStats(){
+
+  const totalOutstanding =
+    DATA.liabilities.reduce(
+      (s,l) => s + Number(l.outstanding || 0),
+      0
+    );
+
+  const totalAnnualInterest =
+    DATA.liabilities.reduce(
+      (s,l) =>
+        s + (
+          Number(l.outstanding || 0) *
+          (Number(l.rate || 0) / 100)
+        ),
+      0
+    );
+
+  const weightedRate =
+    totalOutstanding > 0
+      ? (totalAnnualInterest / totalOutstanding) * 100
+      : 0;
+
+  const highest =
+    DATA.liabilities.reduce(
+      (max,l) =>
+        (Number(l.rate || 0) > (max?.rate || 0))
+          ? l
+          : max,
+      null
+    );
+
+  return {
+    totalOutstanding,
+    totalAnnualInterest,
+    weightedRate,
+    highest,
+    count: DATA.liabilities.length
+  };
+}
+
+
+/* ---------------- SMART TIP ---------------- */
+
+function smartTip(t){
+
+  const ls = liabilityStats();
+
+  const bondRate = 12.0;
+
+  const surplus = Number(t.surplus || 0);
+
+  let html = '';
+
+  /* ---- LIABILITIES vs INVESTMENTS ROI BALANCE ---- */
+
+  html += `
+    <div class="mt-3 mb-3 p-3 rounded-xl bg-[#E7F8F2] dark:bg-[#054C44]">
+      <p class="text-xs font-bold mb-2 text-[#075E54] dark:text-[#25D366]">
+        ⚖️ Liabilities vs Investments ROI Balance
+      </p>
+      <div class="space-y-2">
+  `;
+
+  /* Weighted liability rate bar */
+  const maxRate = Math.max(ls.weightedRate, bondRate, 1);
+  const liabPct = Math.min((ls.weightedRate / maxRate) * 100, 100);
+  const bondPct = Math.min((bondRate / maxRate) * 100, 100);
+
+  html += `
+    <div>
+      <div class="flex justify-between text-[11px] mb-0.5">
+        <span class="font-semibold text-red-500">Avg. Liability Rate</span>
+        <span class="font-bold">${ls.weightedRate.toFixed(1)}%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${liabPct}%;background:#EF4444"></div>
+      </div>
+    </div>
+    <div>
+      <div class="flex justify-between text-[11px] mb-0.5">
+        <span class="font-semibold text-emerald-500">A+ Bond Rate</span>
+        <span class="font-bold">${bondRate.toFixed(1)}%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${bondPct}%;background:#10B981"></div>
+      </div>
+    </div>
+  `;
+
+  html += `</div></div>`;
+
+  /* ---- SMART RECOMMENDATION ---- */
+
+  if(surplus > 0){
+
+    if(ls.weightedRate > bondRate){
+
+      const liabAlloc = Math.round(surplus * 0.70);
+      const invAlloc = surplus - liabAlloc;
+
+      html += `
+        <div class="mt-2 p-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800">
+          <p class="text-xs font-bold text-red-600 dark:text-red-300 mb-1">
+            🚨 High Liability Cost Detected
+          </p>
+          <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-5">
+            Your weighted liability rate is <strong>${ls.weightedRate.toFixed(1)}%</strong>,
+            which is higher than the A+ bond rate of <strong>${bondRate}%</strong>.
+            <br><br>
+            <strong>Recommended split of ${conv(surplus)} surplus:</strong>
+          </p>
+          <ul class="text-[11px] text-slate-600 dark:text-slate-300 mt-1.5 space-y-1 ml-4 list-disc">
+            <li><strong>${conv(liabAlloc)} (70%)</strong> → Prepay your highest-rate liability
+              ${ls.highest ? '(' + esc(ls.highest.name) + ' at ' + ls.highest.rate + '%)' : ''}
+            </li>
+            <li><strong>${conv(invAlloc)} (30%)</strong> → A+ grade bonds @ 12% ROI
+              <span class="text-[10px] text-slate-400">(Subject to T&amp;C, market risks &amp; credit rating)</span>
+            </li>
+          </ul>
+          <p class="text-[10px] text-slate-400 mt-2 italic">
+            *This is a suggestion only. Consult a SEBI-registered investment advisor before acting.
+          </p>
+        </div>
+      `;
+
+    } else if(ls.weightedRate > 0){
+
+      const invAlloc = Math.round(surplus * 0.60);
+      const liabAlloc = surplus - invAlloc;
+
+      html += `
+        <div class="mt-2 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+          <p class="text-xs font-bold text-emerald-600 dark:text-emerald-300 mb-1">
+            ✅ Investment Opportunity
+          </p>
+          <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-5">
+            Your liability rate (${ls.weightedRate.toFixed(1)}%) is below the A+ bond rate (${bondRate}%).
+            <br><br>
+            <strong>Recommended split of ${conv(surplus)} surplus:</strong>
+          </p>
+          <ul class="text-[11px] text-slate-600 dark:text-slate-300 mt-1.5 space-y-1 ml-4 list-disc">
+            <li><strong>${conv(invAlloc)} (60%)</strong> → A+ grade bonds @ 12% ROI
+              <span class="text-[10px] text-slate-400">(Subject to T&amp;C, market risks &amp; credit rating)</span>
+            </li>
+            <li><strong>${conv(liabAlloc)} (40%)</strong> → Prepay liabilities for peace of mind</li>
+          </ul>
+          <p class="text-[10px] text-slate-400 mt-2 italic">
+            *This is a suggestion only. Consult a SEBI-registered investment advisor before acting.
+          </p>
+        </div>
+      `;
+
+    } else {
+
+      html += `
+        <div class="mt-2 p-3 rounded-xl bg-[#E7F8F2] dark:bg-[#054C44]">
+          <p class="text-xs font-bold text-[#128C7E] mb-1">
+            💡 No Active Liabilities
+          </p>
+          <p class="text-[11px] text-slate-600 dark:text-slate-300">
+            You have no interest-bearing liabilities.
+            Consider investing your full surplus of ${conv(surplus)} into A+ grade bonds @ 12% ROI
+            <span class="text-[10px] text-slate-400">(Subject to T&amp;C, market risks &amp; credit rating)</span>.
+          </p>
+          <p class="text-[10px] text-slate-400 mt-2 italic">
+            *This is a suggestion only. Consult a SEBI-registered investment advisor before acting.
+          </p>
+        </div>
+      `;
+
+    }
+
+  } else {
+
+    html += `
+      <div class="mt-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800">
+        <p class="text-xs font-bold text-amber-600 dark:text-amber-300 mb-1">
+          ⚠️ No Surplus This Month
+        </p>
+        <p class="text-[11px] text-slate-600 dark:text-slate-300">
+          Your expenses exceed income by ${conv(Math.abs(surplus))}.
+          Focus on reducing high-interest liabilities first
+          ${ls.highest ? '(' + esc(ls.highest.name) + ' at ' + ls.highest.rate + '%)' : ''}
+          before considering investments.
+        </p>
+      </div>
+    `;
+
+  }
+
+  return html;
 }
 
 
@@ -1181,6 +1592,12 @@ function renderOnboardingSlide(i){
   const last =
     i === slides.length - 1;
 
+
+  /* Update dots */
+  const dots = document.querySelectorAll('.onboarding-dot');
+  dots.forEach((dot, idx) => {
+    dot.style.opacity = idx === i ? '1' : '0.2';
+  });
 
   document.getElementById(
     'onboardingContent'
@@ -2029,7 +2446,7 @@ Chart.register(
    DASHBOARD
    ========================================================= */
 
-function renderDashboard(){
+function renderOldDashboard(){
 
   const t =
     totals();
@@ -2861,6 +3278,173 @@ function renderDashboard(){
 
 
 /* =========================================================
+   NEW DASHBOARD (from v1.0)
+   ========================================================= */
+
+function renderDashboard(){
+  const t = totals();
+  const cats = categoryTotals().filter(c => c.value > 0);
+  const totalAssets = t.assets;
+
+  const maxCatValue = Math.max(...cats.map(c => c.value), 1);
+
+  const barChartHtml = cats.map(c => {
+    const height = Math.max((c.value / maxCatValue) * 100, 5);
+    return `
+      <div class="bar-group">
+        <div class="bar" style="height:${height}%;background:${esc(c.color)}">
+          <span class="bar-value">${conv(c.value)}</span>
+        </div>
+        <span class="bar-label">${esc(c.name)}</span>
+      </div>
+    `;
+  }).join('');
+
+  let donutStops = '';
+  let cumulative = 0;
+  if (totalAssets > 0) {
+    const stops = [];
+    cats.forEach(c => {
+      const start = cumulative;
+      cumulative += (c.value / totalAssets) * 100;
+      stops.push(`${esc(c.color)} ${start.toFixed(2)}% ${cumulative.toFixed(2)}%`);
+    });
+    donutStops = stops.join(', ');
+  } else {
+    donutStops = '#e5eaf1 0% 100%';
+  }
+
+  const tableRows = DATA.assets.map(a => {
+    const cat = DATA.categories.find(c => c.id === a.cat);
+    return `
+      <tr>
+        <td>${esc(a.name)}</td>
+        <td>${esc(cat?.name || a.cat)}</td>
+        <td>${conv(a.value)}</td>
+        <td>${esc(a.owner || 'Self')}</td>
+        <td class="positive">Active</td>
+      </tr>
+    `;
+  }).join('');
+
+  const main = document.getElementById('mainContent');
+
+  main.innerHTML = `
+    <div class="new-dashboard">
+      ${!authUser ? `
+        <div class="wa-card p-3 mb-4 flex items-center justify-between gap-3 border-[#25D366]">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#25D366]"></span>
+            <div>
+              <p class="text-xs font-bold">Demo Mode</p>
+              <p class="text-[10px] text-slate-400">Edit the sample values to explore WealthApp</p>
+            </div>
+          </div>
+          <button onclick="showRegistration()" class="text-xs font-bold text-[#128C7E]">Register</button>
+        </div>
+      ` : ''}
+
+      <div class="welcome">
+        <h1>${authUser?.name ? 'Welcome, ' + esc(authUser.name) : 'Wealth Dashboard'}</h1>
+        <p>Track your net worth, investments, property and financial goals.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="metric-label">Total Net Worth</div>
+          <div class="metric-value">${conv(t.net)}</div>
+          <div class="metric-sub positive">↑ Assets minus liabilities</div>
+        </div>
+        <div class="card">
+          <div class="metric-label">Total Assets</div>
+          <div class="metric-value">${conv(t.assets)}</div>
+          <div class="metric-sub">All categories combined</div>
+        </div>
+        <div class="card">
+          <div class="metric-label">Total Liabilities</div>
+          <div class="metric-value negative">${conv(t.liabilities)}</div>
+          <div class="metric-sub negative">Loans & EMIs</div>
+        </div>
+        <div class="card">
+          <div class="metric-label">Monthly Surplus</div>
+          <div class="metric-value">${conv(t.surplus)}</div>
+          <div class="metric-sub ${t.surplus >= 0 ? 'positive' : 'negative'}">${t.surplus >= 0 ? '▲ Income exceeds expenses' : '▼ Deficit'}</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Category Breakdown</div>
+            <button class="card-action" onclick="render('wealth')">Manage</button>
+          </div>
+          <div class="chart">
+            ${barChartHtml || '<p class="text-sm text-slate-400 w-full text-center">No asset data</p>'}
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Asset Allocation</div>
+          </div>
+          <div class="allocation-layout">
+            <div class="donut" style="background: conic-gradient(${donutStops})">
+              <div class="donut-inner">
+                <div>
+                  <strong>${cats.length}</strong>
+                  <span>Categories</span>
+                </div>
+              </div>
+            </div>
+            <div class="legend">
+              ${cats.map(c => `
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-dot" style="background:${esc(c.color)}"></span>
+                    ${esc(c.name)}
+                  </div>
+                  <strong>${pct(c.value, totalAssets)}%</strong>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="card-header" style="padding:20px 20px 0">
+          <div class="card-title">Portfolio Summary</div>
+          <button class="card-action" onclick="render('wealth')">View all</button>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Category</th>
+                <th>Value</th>
+                <th>Owner</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows || '<tr><td colspan="5" style="text-align:center;color:#94a3b8;padding:20px">No assets yet. Add some from the Wealth section.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-4 wa-card p-4 border-l-4 border-[#25D366]">
+        <p class="text-sm font-medium mb-1">💡 Smart Suggestion</p>
+        ${smartTip(t)}
+      </div>
+    </div>
+  `;
+
+  lucide.createIcons();
+}
+
+/* =========================================================
    WEALTH / EDIT
    ========================================================= */
 
@@ -3118,6 +3702,8 @@ function renderWealth(){
                 <p class="text-xs text-slate-400">
 
                   EMI ${convFull(l.emi)}
+
+                  ${l.rate ? ' • ' + l.rate + '% p.a.' : ''}
 
                   ${
                     l.owner
@@ -3704,6 +4290,15 @@ function openLiabilityModal(id=null){
 
 
       ${field(
+        'Interest Rate %',
+        'mLRate',
+        l?.rate || '',
+        'number',
+        'min="0" step="0.01"'
+      )}
+
+
+      ${field(
         'Owner',
         'mLOwner',
         l?.owner || 'Self'
@@ -3791,6 +4386,13 @@ function saveLiability(){
       Number(
         document.getElementById(
           'mEmi'
+        ).value
+      ) || 0,
+
+    rate:
+      Number(
+        document.getElementById(
+          'mLRate'
         ).value
       ) || 0,
 
